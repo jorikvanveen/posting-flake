@@ -27,7 +27,6 @@
       }));
 
       httpx = (py-pkgs.httpx.overrideAttrs (oldAttrs: rec {
-        # Remove this override when 0.27.2 is in nixpkgs
         version = "0.27.2";
         src = pkgs.fetchFromGitHub {
           owner = "encode";
@@ -40,7 +39,6 @@
       }));
 
       textual = (py-pkgs.textual.overrideAttrs (oldAttrs: rec {
-        # Remove this override when 0.83 is in nixpkgs
         version = "0.85.0";
         src = pkgs.fetchFromGitHub {
           owner = "Textualize";
@@ -82,24 +80,6 @@
           py-pkgs.typing-extensions
         ];
       }));
-
-      #watchfiles = (py-pkgs.watchfiles.overrideAttrs (oldAttrs: rec {
-      #  version = "0.24.0";
-
-      #  src = pkgs.fetchFromGitHub {
-      #    owner = "samuelcolvin";
-      #    repo = oldAttrs.pname;
-      #    rev = "refs/tags/v${version}";
-      #    hash = "sha256-uc4CfczpNkS4NMevtRxhUOj9zTt59cxoC0BXnuHFzys=";
-      #  };
-
-      #  cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
-      #    inherit src;
-      #    name = "${oldAttrs.pname}-${version}";
-      #    hash = "";
-      #  };
-      #}));
-
 
       textual-autocomplete = py-pkgs.buildPythonPackage rec {
         pname = "textual_autocomplete";
