@@ -3,15 +3,10 @@
     utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
-  outputs = { nixpkgs, utils }: utils.lib.eachDefaultSystem (system:
+  outputs = { self, nixpkgs, utils }: utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-
-      # Python 3.11 seems to be necessary for the version of pydantic-core that
-      # this version of pydantic requires:
-      #
-      # https://stackoverflow.com/questions/78593700/langchain-community-langchain-packages-giving-error-missing-1-required-keywor
-      py-pkgs = pkgs.python311Packages;
+      py-pkgs = pkgs.python312Packages;
 
       pydantic-settings = (py-pkgs.pydantic-settings.overrideAttrs (oldAttrs: rec {
         version = "2.6.0";
